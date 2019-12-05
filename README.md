@@ -1,3 +1,4 @@
-# ytmp3bot
+# Youtube MP3 bot
 
-youtube mp3 bot
+## Getting Started
+

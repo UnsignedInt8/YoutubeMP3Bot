@@ -1,13 +1,16 @@
 {
-  "name": "ytmp3bot",
+  "name": "youtubemp3bot",
   "version": "1.0.0",
-  "description": "youtube mp3 bot",
+  "description": "Convert Youtube Videos to MP3",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
   "repository": "https://github.com/UnsignedInt8/ytmp3bot",
   "license": "MIT",
   "keywords": [],
+  "bin": {
+    "youtubemp3bot": "build/main/index.js"
+  },
   "scripts": {
     "describe": "npm-scripts-info",
     "build": "run-s clean && run-p build:*",
