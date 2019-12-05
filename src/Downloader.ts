@@ -10,15 +10,21 @@ class Downloader extends EventEmitter {
     static readonly shared = new Downloader();
 
     async getInfo(url: string) {
-        let info = await ytdl.getBasicInfo(url);
-        return info;
+        try {
+            let info = await ytdl.getBasicInfo(url);
+            return info;
+        } catch {
+            return undefined;
+        }
     }
 
     async download(url: string) {
         let info = await this.getInfo(url);
+        if (!info) return undefined;
 
         let stream = ytdl(url, {
-            quality: 'highestaudio',
+            // quality: 'highestaudio',
+            filter: 'audioonly',
         });
 
         let start = Date.now();
@@ -26,9 +32,10 @@ class Downloader extends EventEmitter {
         return new Promise<Mp3Info>(resolve => {
             let filePath = path.join(tmpDir, info.video_id + '.mp3');
             ffmpeg(stream).audioBitrate(128).save(filePath).on('progress', (p) => {
+                let infoDesc = `${info.title} ${p.timemark} ${p.targetSize}kb downloaded`;
                 readline.cursorTo(process.stdout, 0);
-                process.stdout.write(`${p.targetSize}kb downloaded`);
-                this.emit('progress', { id: info.video_id, title: info.title, progress: p, targetSize: p.targetSize })
+                process.stdout.write(infoDesc);
+                this.emit('progress', { id: info.video_id, title: info.title, progress: p, targetSize: p.targetSize, desc: infoDesc })
             }).on('end', () => {
                 console.log(`\ndone, ${info.title} - ${(Date.now() - start) / 1000}s`);
                 resolve({
