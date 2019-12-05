@@ -13,7 +13,14 @@ export default class Bot {
     }
 
     launch() {
+        this.bot.on('message', this.handleMessage);
         this.bot.launch().then(() => console.info(`Bot is running`));
+    }
+
+    private handleMessage = async (ctx: ContextMessageUpdate) => {
+        let url = ctx.message.text;
+        if (!url.startsWith('http')) return;
+        await this.download(url, ctx);
     }
 
     private handleStart = async (ctx: ContextMessageUpdate, next: Function) => {
@@ -25,6 +32,12 @@ export default class Bot {
         let [_, url] = ctx.message.text.split(' ');
         if (!url) return;
 
+        await this.download(url, ctx);
+
+        if (next) next();
+    }
+
+    private async download(url: string, ctx: ContextMessageUpdate) {
         let intro = await Downloader.getInfo(url);
         if (!intro) {
             await ctx.reply(`${url} not found.`);
@@ -41,7 +54,5 @@ export default class Bot {
 
         await ctx.replyWithAudio({ source: info.path, filename: info.title }, { caption: info.description, duration: info.seconds, title: info.title });
         fs.unlink(info.path, () => { });
-
-        if (next) next();
     }
 }
