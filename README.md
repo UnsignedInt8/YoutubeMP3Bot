@@ -2,6 +2,8 @@
 
 Listen to Youtube videos via Telegram
 
+![Youtube MP3 Bot](./screenshots/Bot.png)
+
 ## Prerequisites
 
 To run this bot, you need to have a local installation of FFmpeg present on your system. You can download it from https://www.ffmpeg.org/download.html
@@ -21,7 +23,7 @@ $> youtubemp3bot -t Bot_token
 
 ## Notes
 
-1). Telegram bot has a file size limit for sending in 50MB. (In other words, the supported maximum duration of a video is about 1 hour)
+1). Telegram bot has a file size limit for sending in 50MB. 
 
 2). Default MP3 Bitrate: 128 Kbps
 
