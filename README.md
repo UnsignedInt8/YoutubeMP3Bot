@@ -25,6 +25,8 @@ $> youtubemp3bot -t Bot_token
 
 2). Default MP3 Bitrate: 128 Kbps
 
+3). To convert a 10 minutes video may need 10 minutes.
+
 ## LICENSE
 
 MIT ©️ Copyright UnsignedInt8
