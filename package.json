@@ -1,6 +1,6 @@
 {
   "name": "youtubemp3bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convert Youtube Videos to MP3",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",

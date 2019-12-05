@@ -2,6 +2,10 @@
 
 Listen to Youtube videos via Telegram
 
+## Prerequisites
+
+To run this bot, you need to have a local installation of FFmpeg present on your system. You can download it from https://www.ffmpeg.org/download.html
+
 ## Getting Started
 
 ```
