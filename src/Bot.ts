@@ -19,7 +19,7 @@ export default class Bot {
     private handleStart = async (ctx: ContextMessageUpdate, next: Function) => {
         await ctx.reply('Welcome');
         if (next) next();
-        await ctx.deleteMessage();
+        await this.deleteMessage(ctx);
     }
 
     private handleDL = async (ctx: ContextMessageUpdate, next: Function) => {
@@ -46,7 +46,11 @@ export default class Bot {
 
             if (next) next();
         } finally {
-            await ctx.deleteMessage();
+            await this.deleteMessage(ctx);
         }
+    }
+
+    async deleteMessage(ctx: ContextMessageUpdate) {
+        await this.bot.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
     }
 }

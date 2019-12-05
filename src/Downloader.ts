@@ -28,10 +28,11 @@ class Downloader extends EventEmitter {
         });
 
         let start = Date.now();
+        let bitrate = Number.parseInt(info.length_seconds) > 3600 ? 64 : 128;
 
         return new Promise<Mp3Info>(resolve => {
             let filePath = path.join(tmpDir, info.video_id + '.mp3');
-            ffmpeg(stream).audioBitrate(128).save(filePath).on('progress', (p) => {
+            ffmpeg(stream).audioBitrate(bitrate).save(filePath).on('progress', (p) => {
                 let infoDesc = `${info.title} ${p.timemark} ${p.targetSize}kb downloaded`;
                 readline.cursorTo(process.stdout, 0);
                 process.stdout.write(infoDesc);
