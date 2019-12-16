@@ -52,7 +52,11 @@ export default class Bot {
             return;
         }
 
-        await ctx.replyWithAudio({ source: info.path, filename: info.title }, { caption: info.description, duration: info.seconds, title: info.title });
+        try {
+            await ctx.replyWithAudio({ source: info.path, filename: info.title }, { caption: info.description, duration: info.seconds, title: info.title });
+        } catch (error) {
+        }
+        
         fs.unlink(info.path, () => { });
     }
 }
