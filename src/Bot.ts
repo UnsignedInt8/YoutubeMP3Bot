@@ -60,6 +60,7 @@ export default class Bot {
         try {
             await ctx.replyWithAudio({ source: info.path, filename: info.title }, { caption: info.description, duration: info.seconds, title: info.title });
         } catch (error) {
+            console.error(error.message);
         }
 
         fs.unlink(info.path, () => { });

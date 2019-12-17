@@ -34,8 +34,7 @@ class Downloader extends EventEmitter {
             let filePath = path.join(tmpDir, info.video_id + '.mp3');
             ffmpeg(stream).audioBitrate(bitrate).save(filePath).on('progress', (p) => {
                 let infoDesc = `${info.title} ${p.timemark} ${p.targetSize}kb downloaded`;
-                readline.cursorTo(process.stdout, 0);
-                process.stdout.write(infoDesc);
+                console.log(infoDesc);
                 this.emit('progress', { id: info.video_id, title: info.title, progress: p, targetSize: p.targetSize, desc: infoDesc })
             }).on('end', () => {
                 console.log(`\ndone, ${info.title} - ${(Date.now() - start) / 1000}s`);
