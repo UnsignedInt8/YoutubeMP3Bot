@@ -44,6 +44,11 @@ export default class Bot {
             return;
         }
 
+        if (Number.parseInt(intro.length_seconds) > 7200) {
+            await ctx.reply(`${intro.title} is too large`);
+            return;
+        }
+
         await ctx.reply(`Downloading ${intro.title}`);
 
         let info = await Downloader.download(url);
@@ -56,7 +61,7 @@ export default class Bot {
             await ctx.replyWithAudio({ source: info.path, filename: info.title }, { caption: info.description, duration: info.seconds, title: info.title });
         } catch (error) {
         }
-        
+
         fs.unlink(info.path, () => { });
     }
 }
