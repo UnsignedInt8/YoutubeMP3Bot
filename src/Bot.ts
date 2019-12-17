@@ -58,7 +58,8 @@ export default class Bot {
         }
 
         try {
-            await ctx.replyWithAudio({ source: info.path, filename: info.title }, { caption: info.description, duration: info.seconds, title: info.title });
+            let caption = info.description.substring(0, Math.min(info.description.length, 300)) + '...';
+            await ctx.replyWithAudio({ source: info.path, filename: info.title }, { caption, duration: info.seconds, title: info.title });
         } catch (error) {
             console.error(error.message);
         }
