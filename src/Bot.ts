@@ -19,6 +19,7 @@ export default class Bot {
 
     private handleMessage = async (ctx: ContextMessageUpdate) => {
         let url = ctx.message.text;
+        if (!url) return;
         if (!url.startsWith('http')) return;
         await this.download(url, ctx);
     }
